@@ -1,0 +1,1 @@
+g++ simpletest_raspicam_cv.ccp -o simpletest_raspicam_cv -I/usr/local/include/ -lraspicam -lraspicam_cv -lopencv_core -lopencv_highgui
