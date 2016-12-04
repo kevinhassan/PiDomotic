@@ -24,7 +24,7 @@ int main(void)
 	  read_byte();
 	  read_block();
 	  data=r_buf[1]* 256 + r_buf[2];
-		if(data =< 10)
+		if(data <= 10)
 		{
 			printf("Veuillez vous éloigner de la caméra");
 			digitalWrite(pinBuzzer,1); // envoie "HIGH" sur le port pinBuzzer (allume le buzzer)
