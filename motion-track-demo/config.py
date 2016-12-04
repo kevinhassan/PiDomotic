@@ -2,7 +2,7 @@
 
 # Display Settings
 debug = True        # Set to False for no data display
-window_on = True   # Set to True displays opencv windows (GUI desktop reqd)
+window_on = True # Set to True displays opencv windows (GUI desktop reqd)
 diff_window_on = False  # Show OpenCV image difference window
 thresh_window_on = False  # Show OpenCV image Threshold window
 SHOW_CIRCLE = True  # show a circle otherwise show bounding rectancle on window
