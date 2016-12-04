@@ -6,35 +6,40 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <unistd.h>
 using namespace std; 
+using namespace cv;
 
 
 int width = 2592;
 int height = 1944;
- 
+const char * window_title = "Raspicam-Test"; 
 int main ( int argc,char **argv ) {
 	raspicam::RaspiCam_Cv Camera;
-	cv::Mat image;
-	cv::namedWindow("Raspicam", cv::WINDOW_AUTOSIZE);
+	Mat frame;
+	namedWindow(window_title, cv::WINDOW_AUTOSIZE);
 	cout<<"Press any key to close the window"<<endl;
 	Camera.set(CV_CAP_PROP_FRAME_WIDTH,width);
 	Camera.set(CV_CAP_PROP_FRAME_HEIGHT,height);
-	Camera.set( CV_CAP_PROP_FORMAT, CV_8UC1 );
 	cout<<"Capturing..."<<endl;
-    	if ( !Camera.open ( ) ) {
+    	Camera.open();
+	if ( !Camera.isOpened ( ) ) {
 	
         	cerr<<"Error opening the camera"<<endl;
         	return -1;
     	}
 	while(1){
-		Camera.grab();
-		Camera.retrieve(image);
-		//stop camera when any key is pressed
-		if(cv::waitKey(0)){
-			break;
+		if(!Camera.grab()){
+			cerr<<"Error can not grab images"<<endl;
+		}else{
+			Camera.retrieve(frame);
+			imshow(window_title, frame);
+			//stop camera when any key is pressed
+			if(waitKey(0)){
+				break;
+			}
 		}
-		
 	}
 	cout<<"Stop camera..."<<endl;
+	cvDestroyWindow(window_title);
 	Camera.release();
 	return 0;
 }
