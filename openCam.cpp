@@ -9,19 +9,24 @@
 using namespace cv;
 using namespace std;
 
+/* Global variables*/
+const char* window_title = "capture-camera";
+
 
 int main( int argc, char** argv)
 {
-  const char* window_title = "capture-camera";
-  VideoCapture cap(0); // open the default camera
-  if(!cap.isOpened())  // check if we succeeded
-    return -1;
+  VideoCapture capture;
+  Mat frame;
+  capture.open(0); //open default camera
 
-  Mat edges;
+  //If camera doesn't work we print and return an error
+  if (!capture.isOpened()){
+    printf("Error opening video capture ! \n");
+    return -1;
+  }
   namedWindow(window_title,CV_WINDOW_AUTOSIZE);
-  while(1){
-    Mat frame;
-    cap >> frame;
+
+  while(capture.read(frame)){
     imshow(window_title, frame);
     if(waitKey(30) >= 0) break; //press any key to exit
   }
