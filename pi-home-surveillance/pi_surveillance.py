@@ -31,7 +31,9 @@ rawCapture = PiRGBArray(camera, size=tuple(conf["resolution"]))
 # allow the camera to warmup, then initialize the average frame, last
 # uploaded timestamp, and frame motion counter
 print "Lancement de la camera ..."
-avg = camera.read()
+my_stream = BytesIO()
+camera.start_preview()
+camera.capture(my_stream, 'jpeg')
 motionCounter = False
 
 # capture frames from the camera
@@ -47,7 +49,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
 	# check to see if the frames should be displayed to screen
 	if conf["show_video"]:
 		# display the security feed
-		cv2.imshow("Security Feed", avg)
+		cv2.imshow("Security Feed", my_stream)
 		key = cv2.waitKey(1) & 0xFF
 
 		# if the `q` key is pressed, break from the lop
