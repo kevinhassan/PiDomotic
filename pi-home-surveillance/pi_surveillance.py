@@ -60,7 +60,7 @@ print("Exposure: ", exposure)
 
 # allow the camera to warmup, then initialize the average frame, last
 # uploaded timestamp, and frame motion counter
-print "Lancement de la caméra ..."
+print "Lancement de la camera ..."
 avg = None
 motionCounter = False
 
