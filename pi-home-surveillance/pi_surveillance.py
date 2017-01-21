@@ -31,8 +31,7 @@ rawCapture = PiRGBArray(camera, size=tuple(conf["resolution"]))
 # allow the camera to warmup, then initialize the average frame, last
 # uploaded timestamp, and frame motion counter
 print "Lancement de la camera ..."
-camera.start_preview()
-avg = camera.capture()
+avg = camera.start_preview()
 motionCounter = False
 
 # capture frames from the camera
