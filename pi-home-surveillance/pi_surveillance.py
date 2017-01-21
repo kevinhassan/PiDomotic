@@ -39,6 +39,11 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
 	# grab the raw NumPy array representing the image and initialize
 	frame = f.array
 
+	# resize the frame, convert it to grayscale, and blur it
+	frame = imutils.resize(frame, width=500)
+	frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	frame = cv2.GaussianBlur(frame, (21, 21), 0)
+
 	# check to see if the frames should be displayed to screen
 	if conf["show_video"]:
 		# display the security feed
@@ -51,6 +56,3 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
 
 	# clear the stream in preparation for the next frame
 	rawCapture.truncate(0)
-
-def printFunction():
-	print("hello");
