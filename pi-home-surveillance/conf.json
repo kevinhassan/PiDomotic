@@ -1,7 +1,6 @@
 {
 	"show_video": true,
-	"min_upload_seconds": 3.0,
-	"min_motion_frames": 1,
+	"min_motion_frames": 8,
 	"camera_warmup_time": 2.5,
 	"delta_thresh": 5,
 	"resolution": [640, 480],
