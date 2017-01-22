@@ -1,6 +1,7 @@
 {
 	"show_video": true,
 	"delta_thresh": 5,
+	"camera_warmup_time": 2.5,
 	"fps": 30,
         "resolution": [640, 480],
 	"min_area": 5000
