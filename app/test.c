@@ -1,8 +1,22 @@
+#include <unistd.h>
+#include <fcntl.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+
+int detectPersonne(char presence[]){
+	return strcmp(presence,"True%");
+}
 
 int main(){
-	system("yee --ip=192.168.43.236 toggle");
+	system("python detectPresence.py");
+	//Lire le fichier contenant le booleen
+	FILE *fp;
+	char buff[255];
+	fp = fopen("presence.txt", "r");
+	fscanf(fp, "%s", buff);
+	fclose(fp);
+	printf("%d",detectPersonne(buff));
 	return 0;
 }
+

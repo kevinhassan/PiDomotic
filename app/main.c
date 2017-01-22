@@ -31,7 +31,7 @@ int main(void)
 				//printf("Par la condition lumière éteinte");
 			}
 			else{
-			  if (detectPersonne(background)){
+			  if (detectPersonne()){
 			  	system("yee --ip=192.168.43.236 toggle");
 				//printf("Par la condition detecte une personne");
 			  }
