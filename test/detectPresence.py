@@ -12,7 +12,8 @@ def estPresent():
 	#camera.capture('background.jpg')
 	background = cv2.imread('background.jpg')
 	cv2.GaussianBlur(background,(5,5),0)
-
+	
+	camera.resolution = (1024, 768)
 	camera.capture('frame.jpg')
 	frame = cv2.imread('frame.jpg')
 	cv2.GaussianBlur(frame,(5,5),0)

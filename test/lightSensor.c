@@ -1,6 +1,6 @@
-//GrovePi Example for using the digital write command
+//Fichier pour utiliser la sensibilisation de la lumière
 
-#include "grovepi.h"
+#include "lightSensor.h"
 
 //Compilation : gcc grovepi_ultrasonic.c grovepi.c -Wall -o grovepi_ultrasonic
 //Execution : sudo ./grovepi_ultrasonic
@@ -9,11 +9,13 @@
 
 	const int pinLight= A0; // détecteur de lumière en A0
 
-	bool isLight(){
-	  return (analogRead(pinLight)>50); // quand la lumière est inférieure ou égale 50 ça veut dire que la lumière est éteint
+	int isLight(){
+	  return (analogRead(pinLight)>50); // quand le capteur a une valeur de 51 ou plus on considère que la pièce est allumée ou n'a pas besoin d'être allumé
 	}
 
-int main(){
+/*
+C'est pour faire les tests après 
+ int main(){
 	while(true){
 	  if((isLight()){
 	    printf("%d",analogRead(pinLight));
@@ -22,4 +24,5 @@ int main(){
 	}
 
 	return 1;
-}		
+}
+*/		
