@@ -36,17 +36,14 @@ rawCapture = PiRGBArray(camera, size=tuple(conf["resolution"]))
 print "[INFO] warming up..."
 time.sleep(conf["camera_warmup_time"])
 avg = None
-lastUploaded = datetime.datetime.now()
-motionCounter = 0
+presence = False
 
 # capture frames from the camera
 for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	# grab the raw NumPy array representing the image and initialize
 	# the timestamp and occupied/unoccupied text
 	frame = f.array
-	timestamp = datetime.datetime.now()
 	text = "Unoccupied"
-
 	# resize the frame, convert it to grayscale, and blur it
 	frame = imutils.resize(frame, width=500)
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -83,42 +80,8 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
 		# and update the text
 		(x, y, w, h) = cv2.boundingRect(c)
 		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-		text = "Occupied"
-
-	# draw the text and timestamp on the frame
-	ts = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
-	cv2.putText(frame, "Room Status: {}".format(text), (10, 20),
-		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-	cv2.putText(frame, ts, (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX,
-		0.35, (0, 0, 255), 1)
-
-	# check to see if the room is occupied
-	if text == "Occupied":
-		# check to see if enough time has passed between uploads
-		if (timestamp - lastUploaded).seconds >= conf["min_upload_seconds"]:
-			# increment the motion counter
-			motionCounter += 1
-
-			# check to see if the number of frames with consistent motion is
-			# high enough
-			if motionCounter >= conf["min_motion_frames"]:
-				# write the image to temporary file
-				t = TempImage()
-				cv2.imwrite(t.path, frame)
-
-				# upload the image to Dropbox and cleanup the tempory image
-				print "[UPLOAD] {}".format(ts)
-				path = "{base_path}/{timestamp}.jpg"
-				t.cleanup()
-
-				# update the last uploaded timestamp and reset the motion
-				# counter
-				lastUploaded = timestamp
-				motionCounter = 0
-
-	# otherwise, the room is not occupied
-	else:
-		motionCounter = 0
+		presence = True
+		break	
 
 	# check to see if the frames should be displayed to screen
 	if conf["show_video"]:
@@ -129,6 +92,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
 		# if the `q` key is pressed, break from the lop
 		if key == ord("q"):
 			break
-
 	# clear the stream in preparation for the next frame
 	rawCapture.truncate(0)
+	print(presence)
+	return presence
