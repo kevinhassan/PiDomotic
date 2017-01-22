@@ -1,8 +1,7 @@
 // main.c
 
-#include "grovepi.h"
 #include "lightSensor.h"
-#include "detectObstacle.h"
+#include "detectPassage.h"
 
 //Compilation : gcc grovepi_ultrasonic.c grovepi.c -Wall -o grovepi_ultrasonic
 //Execution : sudo ./grovepi_ultrasonic
@@ -14,18 +13,30 @@ int main(void)
 	//Exit on failure to start communications with the GrovePi
 	if (init()==-1)
 		exit(1);
+	
+	printf("Ne vous mettez pas devant la caméra, une photo va être prise");
+	//Capteur de lumière sur le port A0 en lecture
+	int pinLight =0;
+	pinMode(pinLight,0);
 
+	//Capteur ultrason branché sur le port D4 (digital 4)
+	int pinUltrason=4;
 	system("raspistill -w 1024 -h 768 -o background.jpg");
+	printf("La caméra a bien été prise");
 	while (1){ // On fait tourner le programme en continue
-	  	if (detectPassage()){
-			if (lumiereEteinte())
-				system("yee --ip=192.168.43.236 toggle");  
-			
+	  	//printf("%d\n",afficherPassage(pinUltrason));
+		if (detectPassage(pinUltrason)){
+			if (lumiereEteinte(pinLight)){
+				system("yee --ip=192.168.43.236 toggle");
+				//printf("Par la condition lumière éteinte");
+			}
 			else{
 			  if (detectPersonne(background)){
 			  	system("yee --ip=192.168.43.236 toggle");
+				//printf("Par la condition detecte une personne");
 			  }
-		pi_sleep(100); // attend 1 seconde
+			}
+		pi_sleep(200); // attend 2 secondes
 		}
 	}
    	return 1;

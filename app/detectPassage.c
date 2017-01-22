@@ -7,14 +7,13 @@
 
 #define us_cmd 7
 
-int pinUltrason = 4; // Capteur branché sur le port D4 (digital 4)
-
-int detectPassage(){
+int detectPassage(int pinUltrason){
 	int data;
 	write_block(us_cmd, pinUltrason, 0, 0);
+	pi_sleep(200);
 	read_byte();
 	read_block();
-	data=r_buff[1]* + r_buff[2];
+	data=r_buf[1]*256 + r_buf[2];
 	if (data <= 100) // distance à mettre en fonction de la pièce dans laquelle se trouve la raspberry
 	  return 1;
 
@@ -22,3 +21,15 @@ int detectPassage(){
 	  return 0;
 	
 }
+
+/* int afficherPassage(int pinUltrason){
+        int data;
+        write_block(us_cmd, pinUltrason, 0, 0);
+	pi_sleep(200);
+        read_byte();
+        read_block();
+        data=r_buf[1]*256 + r_buf[2];
+	return data;
+}
+*/
+

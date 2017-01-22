@@ -1,26 +1,30 @@
 //Fichier pour utiliser la sensibilisation de la lumière
 
 #include "lightSensor.h"
+#include "grovepi.h"
 
 //Compilation : gcc grovepi_ultrasonic.c grovepi.c -Wall -o grovepi_ultrasonic
 //Execution : sudo ./grovepi_ultrasonic
 
 #define us_cmd 7
 
-	const int pinLight= A0; // détecteur de lumière en A0
-
-	int isLight(){
-	  return (analogRead(pinLight)>50); // quand le capteur a une valeur de 51 ou plus on considère que la pièce est allumée ou n'a pas besoin d'être allumé
+	int lumiereEteinte(int pinLight){
+	  return (analogRead(pinLight)<150); // quand le capteur a une valeur inférieure à 150 on considère que la pièce est allumée (de manière naturelle ou artificielle)
 	}
 
-/*
-C'est pour faire les tests après 
+/* 
  int main(){
-	while(true){
-	  if((isLight()){
-	    printf("%d",analogRead(pinLight));
+	if(init()==-1)
+	  exit(1);
+
+	int pinLight=0;
+	pinMode(pinLight,0);
+	printf("Je rentre dans le programme");
+	while(1){
+	  if(isLight(pinLight)){
+	    printf("%d\n",analogRead(pinLight));
 	  }
-	pi_sleep(500); // attend 500 ms
+	pi_sleep(100);
 	}
 
 	return 1;

@@ -3,8 +3,8 @@
 
 #include "grovepi.h"
 
-extern int pinLight;
-
 // Fonction qui détermine si il faut allumer la lumière ou pas
-int isLight(void);
+int lumiereEteinte(int);
+
+#endif /*DETECTPASSAGE_H */
 
