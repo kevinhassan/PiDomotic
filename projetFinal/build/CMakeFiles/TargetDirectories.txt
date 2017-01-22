@@ -1,3 +1,0 @@
-/home/kash/fasproject/projetFinal/build/CMakeFiles/edit_cache.dir
-/home/kash/fasproject/projetFinal/build/CMakeFiles/rebuild_cache.dir
-/home/kash/fasproject/projetFinal/build/CMakeFiles/simpletest_raspicam_cv.dir
