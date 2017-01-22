@@ -4,6 +4,6 @@ echo "Veuillez patienter"
 sudo apt-get update
 sudo apt-get install python-pip python-dev build-essential python-opencv 
 
-sudo pip install grovepi yeecli numpy
+sudo pip install grovepi yeecli numpy ubidots
 
 Installation terminee
