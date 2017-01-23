@@ -35,16 +35,16 @@ int main(void)
 	system("raspistill -w 1024 -h 768 -o background.jpg");
 	printf("La photo a bien été prise\n");
 	while (1){ // On fait tourner le programme en continue
-	  	printf("%d\n",afficherPassage(pinUltrason));
+	  	//printf("%d\n",afficherPassage(pinUltrason));
 		if (detectPassage(pinUltrason)){
 			if (lumiereEteinte(pinLight)){
 				system("yee --ip=192.168.43.236 toggle");
-				printf("Par la condition lumière éteinte\n");
+				printf("La lumière s'allume parce que la lumière était éteinte\n");
 			}
 			else{
 			  if (!detectPersonne()){
 			  	system("yee --ip=192.168.43.236 toggle");
-				printf("Par la condition detecte une personne\n");
+				printf("La lumière s'éteint parce qu'il n'y a personne dans la pièce\n");
 			  }
 			}
 		}

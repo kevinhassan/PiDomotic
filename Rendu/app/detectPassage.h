@@ -6,5 +6,5 @@
 
 //detecte le passage d'une personne
 int detectPassage(int);
-int afficherPassage(int);
+//int afficherPassage(int);
 #endif /*DETECTPASSAGE_H */

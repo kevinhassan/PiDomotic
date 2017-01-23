@@ -12,8 +12,8 @@
 	  return (analogRead(pinLight)<150); // quand le capteur a une valeur inférieure à 150 on considère que la pièce est allumée (de manière naturelle ou artificielle)
 	}
 
-/* 
- int main(){
+ 
+/*  int main(){
 	if(init()==-1)
 	  exit(1);
 
@@ -21,7 +21,7 @@
 	pinMode(pinLight,0);
 	printf("Je rentre dans le programme");
 	while(1){
-	  if(isLight(pinLight)){
+	  if(lumiereEteinte(pinLight)){
 	    printf("%d\n",analogRead(pinLight));
 	  }
 	pi_sleep(100);
