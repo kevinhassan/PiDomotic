@@ -25,7 +25,7 @@ int main(void)
 	if (init()==-1)
 		exit(1);
 	
-	printf("Ne vous mettez pas devant la caméra, une photo va être prise");
+	printf("Ne vous mettez pas devant la caméra, une photo va être prise\n");
 	//Capteur de lumière sur le port A0 en lecture
 	int pinLight =0;
 	pinMode(pinLight,0);
@@ -33,21 +33,20 @@ int main(void)
 	//Capteur ultrason branché sur le port D4 (digital 4)
 	int pinUltrason=4;
 	system("raspistill -w 1024 -h 768 -o background.jpg");
-	printf("La caméra a bien été prise");
+	printf("La photo a bien été prise\n");
 	while (1){ // On fait tourner le programme en continue
-	  	//printf("%d\n",afficherPassage(pinUltrason));
+	  	printf("%d\n",afficherPassage(pinUltrason));
 		if (detectPassage(pinUltrason)){
 			if (lumiereEteinte(pinLight)){
 				system("yee --ip=192.168.43.236 toggle");
-				//printf("Par la condition lumière éteinte");
+				printf("Par la condition lumière éteinte\n");
 			}
 			else{
 			  if (!detectPersonne()){
 			  	system("yee --ip=192.168.43.236 toggle");
-				//printf("Par la condition detecte une personne");
+				printf("Par la condition detecte une personne\n");
 			  }
 			}
-		pi_sleep(200); // attend 2 secondes
 		}
 	}
    	return 1;

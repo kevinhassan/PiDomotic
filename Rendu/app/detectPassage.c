@@ -10,7 +10,7 @@
 int detectPassage(int pinUltrason){
 	int data;
 	write_block(us_cmd, pinUltrason, 0, 0);
-	pi_sleep(200);
+	//pi_sleep(200);
 	read_byte();
 	read_block();
 	data=r_buf[1]*256 + r_buf[2];
@@ -22,14 +22,14 @@ int detectPassage(int pinUltrason){
 	
 }
 
-/* int afficherPassage(int pinUltrason){
+int afficherPassage(int pinUltrason){
         int data;
         write_block(us_cmd, pinUltrason, 0, 0);
-	pi_sleep(200);
+	//pi_sleep(200);
         read_byte();
         read_block();
         data=r_buf[1]*256 + r_buf[2];
 	return data;
 }
-*/
+
 
